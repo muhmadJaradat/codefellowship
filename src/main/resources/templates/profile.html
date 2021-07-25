@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/profile.css">
+</head>
+<body>
+<div class="pCard_card">
+  <div class="pCard_up">
+    <div class="pCard_text">
+      <h2 th:text="${user.firstName} + ${user.lastName}" > </h2>
+      <p th:text="${user.bio}"></p>
+    </div>
+
+  </div>
+  <div class="pCard_down">
+
+    <div>
+      <p>Date of birth</p>
+      <p th:text="${user.dtb}"></p>
+    </div>
+
+  </div>
+
+</div>
+
+<h2>Make a New Post</h2>
+<form action="/users/post" method="POST">
+  <textarea name="postBody" id="postBody" class="text"></textarea>
+  <input type="submit" />
+</form>
+
+<table class="table-bordered">
+  <tr>
+    <th>Date of Post</th>
+    <th>User</th>
+    <th>Post</th>
+  </tr>
+  <tr th:each="post : ${user.posts}">
+    <td th:text="${post.postDate}"></td>
+    <td th:text="${user.username}"></td>
+    <td th:text="${post.body}"></td>
+  </tr>
+</table>
+</body>
+</html>

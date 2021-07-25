@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>signup</title>
+  <link rel="stylesheet" href="signup.css">
+</head>
+
+
+<body id="body">
+<div class="container">
+  <form  th:action="@{/signup}" method="POST" class="content">
+    <h1 id="say-hello">Signup here!</h1>
+    <div>
+      <div class="input">
+        <label for="userName">Your username</label><br />
+        <input class="fld" placeholder="Enter your name" id="userName" name="userName" />
+      </div>
+
+      <div class="input">
+        <label for="password">Password</label><br />
+        <input type="password" class="fld" placeholder="Enter your password" id="password" name="password" />
+      </div>
+
+      <div class="input">
+        <label for="firstName">First Name</label><br />
+        <input class="fld" placeholder="Enter your first name" id="firstName" name="firstName" />
+      </div>
+
+      <div class="input">
+        <label for="lastName">Last Name</label><br />
+        <input class="fld" placeholder="Enter your last name" id="lastName" name="lastName" />
+      </div>
+
+
+
+      <div class="input">
+        <label for="dtb">Date of birth</label><br />
+        <input type="date" class="fld" placeholder="Enter your date of birth" id="dtb" name="dtb" />
+      </div>
+
+
+
+
+
+
+    <div class="input">
+      <label for="bio">Message</label><br />
+      <textarea class="ta" id="bio" cols="30" name="bio"
+            rows=" 10" placeholder="Your bio here..."> </textarea>
+    </div>
+    <button class="btn" type="submit">Submit &#129046;</button>
+  </form>
+</div>
+</body>
+
+</html>
