@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <title>signup</title>
   <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="/header.css">
+
+
 </head>
 
 
 <body id="body">
+<div th:replace="header :: myheader"></div>
 <div class="container">
   <form  th:action="@{/signup}" method="POST" class="content">
     <h1 id="say-hello">Signup here!</h1>

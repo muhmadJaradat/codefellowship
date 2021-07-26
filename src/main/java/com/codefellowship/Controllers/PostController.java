@@ -26,13 +26,12 @@ public class PostController {
     @Autowired
     private PostRepository postRepository;
 
-    @PostMapping("/users/post")
-    public RedirectView createPost( String postBody, Principal p) {
+    @PostMapping("/myprofile")
+    public RedirectView createPost( String postBody, Principal principal) {
 
-        Post newPost = new Post(postBody, new Date());
-        ApplicationUser user = (ApplicationUser) ((UsernamePasswordAuthenticationToken) p).getPrincipal();
-        newPost.user = applicationUserRepository.findApplicationUserByUsername(user.getUsername());
+        ApplicationUser user=applicationUserRepository.findApplicationUserByUsername(principal.getName());
+        Post newPost = new Post(postBody,user);
         postRepository.save(newPost);
-        return new RedirectView("/}");
+        return new RedirectView("/myprofile");
     }
 }
