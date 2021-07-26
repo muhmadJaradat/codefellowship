@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,13 +27,17 @@ public class ApplicationUser implements UserDetails {
     private Date dtb;
     private String bio;
 
-    @OneToMany(mappedBy="application_user")
-    public Set<Post> posts;
+    @OneToMany(mappedBy = "applicationUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
+
 
     public ApplicationUser() {
     }
 
-
+    public ApplicationUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public ApplicationUser(String username, String password, String firstName, String lastName, Date dtb, String bio) {
         this.username = username;
@@ -64,22 +69,22 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setPassword(String password) {
@@ -120,5 +125,9 @@ public class ApplicationUser implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
     }
 }

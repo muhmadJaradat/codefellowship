@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
@@ -29,4 +30,16 @@ public class ProfileController {
         return "profile";
         }
         throw new ResourceNotFoundException();    }
+
+    @GetMapping(value="/myprofile")
+    public String showProfile(Principal principal, Model m) {
+        if(principal != null) {
+
+            ApplicationUser user = applicationUserRepository.findApplicationUserByUsername(principal.getName());
+            m.addAttribute("user",user);
+            m.addAttribute("userName", principal.getName());
+        }
+
+        return "profile";
+    }
 }
