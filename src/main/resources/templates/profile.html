@@ -7,8 +7,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/profile.css">
-  <link rel="stylesheet" href="/header.css">
-
+  <link rel="stylesheet" href="/header.css">\
   <div th:replace="header :: myheader"></div>
 
 </head>
@@ -32,13 +31,14 @@
 
 </div>
 
+<div th:if="${userName}">
 <h2>Make a New Post</h2>
 <form action="/myprofile" method="post">
   <textarea name="postBody" id="postBody" class="text"></textarea>
   <input type="submit" />
 </form>
-
-<table class="table-bordered">
+</div>
+<table class="table-bordered" >
   <tr th:if="${!user.posts.isEmpty()}">
     <th>Date of Post</th>
     <th>User</th>

@@ -11,9 +11,11 @@
   <h1 class="logo">S</h1>
   <ul class="slider-menu">
     <li ><a href="/">Home</a></li>
+    <li sec:authorize="isAuthenticated()"><a href="/feed">Feed</a></li>
     <li ><a href="/signup">Signup</a></li>
-    <li  th:unless="${userName}"><a href="/login">Log in</a></li>
-      <li th:if="${userName}"><a href="/myprofile" th:text="${userName}"></a> </li>
+    <li  sec:authorize="!isAuthenticated()"><a href="/login">Log in</a></li>
+    <li  sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
+      <li sec:authorize="isAuthenticated()"><a href="/myprofile" sec:authentication="name">Username</a> </li>
 
   </ul>
 </div>
