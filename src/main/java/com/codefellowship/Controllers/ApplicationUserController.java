@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -60,5 +58,26 @@ public class ApplicationUserController {
 
     @GetMapping("/login")
     public String loginForm(){return "login";}
+
+    @PostMapping("/follow")
+    public RedirectView followFunction(Principal p,long id){
+ApplicationUser user=applicationUserRepository.findApplicationUserByUsername(p.getName());
+ApplicationUser followedUser=applicationUserRepository.findById(id).orElseThrow();
+
+followedUser.getFollowers().add(user);
+applicationUserRepository.save(followedUser);
+        System.out.println(user.getFollowing());
+return new RedirectView("/");
+    }
+    @PostMapping("/follow/{id}")
+    public RedirectView UnFollowFunction(Principal p, long id ){
+ApplicationUser user=applicationUserRepository.findApplicationUserByUsername(p.getName());
+ApplicationUser followedUser=applicationUserRepository.findById(id).orElseThrow();
+
+followedUser.getFollowers().remove(user);
+applicationUserRepository.save(followedUser);
+        System.out.println(user.getFollowing());
+return new RedirectView("/");
+    }
 
 }

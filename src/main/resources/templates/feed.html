@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="feed.css">
+  <link rel="stylesheet" href="header.css">
+  <div th:replace="header :: myheader"></div>
+</head>
+<body>
+<div th:each="followed:${user.getFollowing()}">
+  <div  th:each="post:${followed.getPosts()}">
+<div class="post">
+
+  <div class="post-content">
+    <p class="post-date">Posted on <time th:data="${post.createdAt}"></time> by <a class="post-author" th:href="@{/users/{id}(id=${followed.getId()})}" th:text="${followed.username}"></a></p>
+    <div class="post-excerpt">
+      <p th:text="${post.body}"></p>
+    </div>
+    <a class="post-link" href="#">Read More</a>
+  </div>
+</div>
+  </div>
+</div>
+
+</body>
+</html>

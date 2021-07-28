@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Post {
@@ -20,6 +22,8 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "application_user_id")
     ApplicationUser applicationUser;
+
+
 
     public Post() {
     }
